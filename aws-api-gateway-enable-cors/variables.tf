@@ -40,15 +40,7 @@ variable "api_resource_id" {
 variable "allow_headers" {
   description = "Allow headers"
   type        = "list"
-
   default = [
-    "Skylastic-Request-Id",
-    "Authorization",
-    "Content-Type",
-    "X-Amz-Date",
-    "Authorization",
-    "X-Api-Key",
-    "X-Amz-Security-Token"
   ]
 }
 

@@ -24,9 +24,21 @@
 
 # local.*
 locals {
+  default_headers = [
+    "Skylastic-Request-Id",
+    "Authorization",
+    "Content-Type",
+    "X-Amz-Date",
+    "Authorization",
+    "X-Api-Key",
+    "X-Amz-Security-Token"
+  ]
+
+  allow_headers = "${concat(local.default_headers, var.allow_headers)}"
+
   headers = "${
     map(
-      "Access-Control-Allow-Headers"    , "'${join(",", var.allow_headers)}'",
+      "Access-Control-Allow-Headers"    , "'${join(",", local.allow_headers)}'",
       "Access-Control-Allow-Methods"    , "'${join(",", var.allow_methods)}'",
       "Access-Control-Allow-Origin"     , "'${var.allow_origin}'"
     )
