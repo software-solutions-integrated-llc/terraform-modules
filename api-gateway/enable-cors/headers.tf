@@ -19,29 +19,12 @@
 # IN THE SOFTWARE.
 
 # -----------------------------------------------------------------------------
-# Variables: API Gateway
+# Locals
 # -----------------------------------------------------------------------------
 
-# var.api_id
-variable "api_id" {
-  description = "API identifier"
-}
-
-# var.api_resource_id
-variable "api_resource_id" {
-  description = "API resource identifier"
-}
-
-# -----------------------------------------------------------------------------
-# Variables: CORS-related
-# -----------------------------------------------------------------------------
-
-# var.allow_headers
-variable "allow_headers" {
-  description = "Allow headers"
-  type        = "list"
-
-  default = [
+# local.*
+locals {
+  default_headers = [
     "Skylastic-Request-Id",
     "Authorization",
     "Content-Type",
@@ -50,40 +33,46 @@ variable "allow_headers" {
     "X-Api-Key",
     "X-Amz-Security-Token"
   ]
+
+  allow_headers = "${concat(local.default_headers, var.allow_headers)}"
+
+  headers = "${
+    map(
+      "Access-Control-Allow-Headers"    , "'${join(",", local.allow_headers)}'",
+      "Access-Control-Allow-Methods"    , "'${join(",", var.allow_methods)}'",
+      "Access-Control-Allow-Origin"     , "'${var.allow_origin}'"
+    )
+  }"
+
+  # Pick non-empty header values
+  header_values = "${compact(values(local.headers))}"
+
+  # Pick names that from non-empty header values
+  header_names = "${matchkeys(
+    keys(local.headers),
+    values(local.headers),
+    local.header_values
+  )}"
+
+  # Parameter names for method and integration responses
+  parameter_names = "${
+    formatlist("method.response.header.%s", local.header_names)
+  }"
+
+  # Map parameter list to "true" values
+  true_list = "${
+    split("|", replace(join("|", local.parameter_names), "/[^|]+/", "true"))
+  }"
+
+  # Integration response parameters
+  integration_response_parameters = "${zipmap(
+    local.parameter_names,
+    local.header_values
+  )}"
+
+  # Method response parameters
+  method_response_parameters = "${zipmap(
+    local.parameter_names,
+    local.true_list
+  )}"
 }
-
-# var.allow_methods
-variable "allow_methods" {
-  description = "Allow methods"
-  type        = "list"
-
-  default = [
-    "OPTIONS",
-    "HEAD",
-    "GET",
-    "POST",
-    "PUT",
-    "PATCH",
-    "DELETE",
-  ]
-}
-
-# var.allow_origin
-variable "allow_origin" {
-  description = "Allow origin"
-  type        = "string"
-  default     = "*"
-}
-
-# # var.allow_max_age
-# variable "allow_max_age" {
-#   description = "Allow response caching time"
-#   type        = "string"
-#   default     = "7200"
-# }
-
-# # var.allowed_credentials
-# variable "allow_credentials" {
-#   description = "Allow credentials"
-#   default     = false
-# }
