@@ -48,7 +48,6 @@ variable "allow_headers" {
 variable "allow_methods" {
   description = "Allow methods"
   type        = "list"
-
   default = [
     "OPTIONS",
     "HEAD",

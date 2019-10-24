@@ -4,7 +4,7 @@
 
 # var.environment
 variable "environment" {
-  description = ""
+  description = "Environment"
   default     = "Test"
 }
 
@@ -15,7 +15,7 @@ variable "environment" {
 # REQUIRED
 # var.service_name
 variable "service_name" {
-  description = ""
+  description = "Service name"
 }
 
 # var.lambda_handler
@@ -41,6 +41,23 @@ variable "lambda_timeout" {
   default     = "30"
 }
 
+# var.subnet_ids
+variable "subnet_ids" {
+  description = "Subnet ids"
+  type        = "list"
+  default     = [
+  ]
+}
+
+# var.security_group_ids
+variable "security_group_ids" {
+  description = "Security group ids"
+  type        = "list"
+  default     = [
+  ]
+}
+
+# var.lambda_filename
 variable "lambda_filename" {
   description = "Lambda filename"
   default     = "../package.zip"
