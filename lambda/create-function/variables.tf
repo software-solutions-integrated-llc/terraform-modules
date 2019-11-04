@@ -8,6 +8,7 @@ variable "environment" {
   default     = "Test"
 }
 
+
 # -----------------------------------------------------------------------------
 # Variables: Lambda
 # -----------------------------------------------------------------------------
@@ -34,6 +35,13 @@ variable "lambda_memory_size" {
   description = "Memory size"
   default     = "256"
 }
+
+# var.lambda_role
+variable "lambda_role" {
+  description = "The role the lambda will assume"
+  default = "lambda_basic_execution"
+}
+
 
 # var.lambda_timeout
 variable "lambda_timeout" {

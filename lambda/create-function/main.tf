@@ -1,6 +1,6 @@
 # Data sources
 data "aws_iam_role" "lambda_iam_role" {
-  name = "lambda_basic_execution"
+  name = "${var.lambda_role}"
 }
 
 # Lambda API
