@@ -35,12 +35,7 @@ variable "api_gateway_name" {
 
 variable "root_resource_id" {
   description = "Root resource id"
-  type        = "map"
-  default     = {
-    Test  = "jin6fqniq2"
-    Dev   = "6tr682e6e0"
-    Prod  = "cbtap9m9r0"
-  }
+  default     = ""
 }
 
 # var.path_part

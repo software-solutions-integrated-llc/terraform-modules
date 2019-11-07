@@ -6,7 +6,7 @@ data "aws_api_gateway_rest_api" "ApiGateway" {
 # Parent APIGW Resource
 resource "aws_api_gateway_resource" "Resource" {
   rest_api_id = "${data.aws_api_gateway_rest_api.ApiGateway.id}"
-  parent_id   = "${var.parent_id == "" ? "${var.root_resource_id["${var.environment}"]}" : "${var.parent_id}"}"
+  parent_id   = "${var.parent_id == "" ? "${var.root_resource_id}" : "${var.parent_id}"}"
   path_part   = "${var.path_part}"
 }
 resource "aws_api_gateway_method" "Method" {
