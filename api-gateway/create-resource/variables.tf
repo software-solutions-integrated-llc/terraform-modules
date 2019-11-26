@@ -2,10 +2,20 @@
 # Variables: Environment
 # -----------------------------------------------------------------------------
 
+variable "aws_account_number" {
+  description = "The AWS account number"
+}
+
+
 # var.environment
 variable "environment" {
   description = ""
   default     = "Test"
+}
+
+variable "region" {
+  description = "The AWS region"
+  default = "us-east-1"
 }
 
 # var.service_name
@@ -19,14 +29,13 @@ variable "service_name" {
 
 # REQUIRED
 # var.root_resource_id
+variable "api_gateway_name" {
+  description = "Name of the target API gateway"
+}
+
 variable "root_resource_id" {
   description = "Root resource id"
-  type        = "map"
-  default     = {
-    Test  = "jin6fqniq2"
-    Dev   = "6tr682e6e0"
-    Prod  = "cbtap9m9r0"
-  }
+  default     = ""
 }
 
 # var.path_part

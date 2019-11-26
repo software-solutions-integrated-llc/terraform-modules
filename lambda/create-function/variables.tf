@@ -8,6 +8,7 @@ variable "environment" {
   default     = "Test"
 }
 
+
 # -----------------------------------------------------------------------------
 # Variables: Lambda
 # -----------------------------------------------------------------------------
@@ -35,6 +36,13 @@ variable "lambda_memory_size" {
   default     = "256"
 }
 
+# var.lambda_role
+variable "lambda_role" {
+  description = "The role the lambda will assume"
+  default = "lambda_basic_execution"
+}
+
+
 # var.lambda_timeout
 variable "lambda_timeout" {
   description = "Lambda timeout"
@@ -60,5 +68,5 @@ variable "security_group_ids" {
 # var.lambda_filename
 variable "lambda_filename" {
   description = "Lambda filename"
-  default     = "../package.zip"
+  default     = "./package.zip"
 }

@@ -1,12 +1,12 @@
 # Data sources
 data "aws_api_gateway_rest_api" "ApiGateway" {
-  name = "AgvanceSKYApi-${var.environment}"
+  name = "${var.api_gateway_name}-${var.environment}"
 }
 
 # Parent APIGW Resource
 resource "aws_api_gateway_resource" "Resource" {
   rest_api_id = "${data.aws_api_gateway_rest_api.ApiGateway.id}"
-  parent_id   = "${var.parent_id == "" ? "${var.root_resource_id["${var.environment}"]}" : "${var.parent_id}"}"
+  parent_id   = "${var.parent_id == "" ? "${var.root_resource_id}" : "${var.parent_id}"}"
   path_part   = "${var.path_part}"
 }
 resource "aws_api_gateway_method" "Method" {
@@ -32,7 +32,7 @@ resource "aws_lambda_permission" "LambdaPermission" {
   function_name = "${var.function_name}"
   principal     = "apigateway.amazonaws.com"
   qualifier     = "${var.qualifier}"
-  source_arn = "arn:aws:execute-api:us-east-1:578736327768:${data.aws_api_gateway_rest_api.ApiGateway.id}/*/${aws_api_gateway_method.Method.http_method}${aws_api_gateway_resource.Resource.path}"
+  source_arn = "arn:aws:execute-api:${var.region}:${var.aws_account_number}:${data.aws_api_gateway_rest_api.ApiGateway.id}/*/${aws_api_gateway_method.Method.http_method}${aws_api_gateway_resource.Resource.path}"
 }
 
 resource "aws_api_gateway_method_response" "response_200" {
