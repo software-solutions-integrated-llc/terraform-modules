@@ -1,0 +1,9 @@
+variable "queue_name" {}
+variable "delay_seconds" {}
+variable "environment" {}
+variable "max_message_size" {}
+variable "message_retention_seconds" {}
+variable "receive_wait_time_seconds" {}
+variable "redrive_policy" {}
+variable "visibility_timeout_seconds" {}
+variable "queue_policy" {}
