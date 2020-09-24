@@ -1,3 +1,9 @@
+provider "aws" {
+  alias = "cognito"
+  profile = "sky"
+  region = "us-east-1"
+}
+
 # Data sources
 data "aws_api_gateway_rest_api" "ApiGateway" {
   name = "${var.api_gateway_name}-${var.environment}"
