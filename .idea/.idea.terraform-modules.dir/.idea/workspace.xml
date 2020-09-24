@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="326edab7-0c08-4187-bde3-9a8551a8032b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.terraform-modules.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.terraform-modules.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/create-resource/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/create-resource/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/create-resource/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/create-resource/variables.tf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +15,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/api-gateway/create-resource/variables.tf" />
         <option value="$PROJECT_DIR$/api-gateway/create-resource/main.tf" />
+        <option value="$PROJECT_DIR$/api-gateway/create-resource/variables.tf" />
       </list>
     </option>
   </component>

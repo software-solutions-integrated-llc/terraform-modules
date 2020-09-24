@@ -70,8 +70,8 @@ variable "cognito_authorizer_name" {
   description = "Api Gateway Cognito Authorizer"
   type        = "map"
   default     = {
-    Test  = "arn:aws:cognito-idp:us-east-1:401025183595:userpool/us-east-1_bHMCanWDt"
-    Dev   = "arn:aws:cognito-idp:us-east-1:401025183595:userpool/us-east-1_bHMCanWDt"
+    Test  = "skyusers-dev"
+    Dev   = "skyusers-dev"
     Prod  = "Cognito_Auth"
   }
 }
