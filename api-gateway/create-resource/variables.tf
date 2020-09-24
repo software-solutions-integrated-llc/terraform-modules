@@ -64,3 +64,14 @@ variable "parent_id" {
 variable "qualifier" {
   description = "Qualifier"
 }
+
+# var.authorizer
+variable "cognito_authorizer_name" {
+  description = "Api Gateway Cognito Authorizer"
+  type        = "map"
+  default     = {
+    Test  = "Cognito_Auth"
+    Dev   = "Cognito_Auth"
+    Prod  = "Cognito_Auth"
+  }
+}

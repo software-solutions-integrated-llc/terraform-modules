@@ -3,6 +3,10 @@ data "aws_api_gateway_rest_api" "ApiGateway" {
   name = "${var.api_gateway_name}-${var.environment}"
 }
 
+data "aws_cognito_user_pools" "CognitoUserPoolName" {
+  name = var.cognito_authorizer_name[var.environment]
+}
+
 # Parent APIGW Resource
 resource "aws_api_gateway_resource" "Resource" {
   rest_api_id = "${data.aws_api_gateway_rest_api.ApiGateway.id}"
@@ -13,7 +17,8 @@ resource "aws_api_gateway_method" "Method" {
   rest_api_id   = "${data.aws_api_gateway_rest_api.ApiGateway.id}"
   resource_id   = "${aws_api_gateway_resource.Resource.id}"
   http_method   = "ANY"
-  authorization = "NONE"
+  authorization = "COGNITO_USER_POOLS"
+  authorizer_id = data.aws_cognito_user_pools.CognitoUserPoolName.id
 }
 
 resource "aws_api_gateway_integration" "Integration" {
