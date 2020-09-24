@@ -5,6 +5,7 @@ data "aws_api_gateway_rest_api" "ApiGateway" {
 
 data "aws_cognito_user_pools" "CognitoUserPoolName" {
   name = var.cognito_authorizer_name[var.environment]
+  provider = "aws.cognito"
 }
 
 # Parent APIGW Resource
@@ -13,6 +14,7 @@ resource "aws_api_gateway_resource" "Resource" {
   parent_id   = "${var.parent_id == "" ? "${var.root_resource_id}" : "${var.parent_id}"}"
   path_part   = "${var.path_part}"
 }
+
 resource "aws_api_gateway_method" "Method" {
   rest_api_id   = "${data.aws_api_gateway_rest_api.ApiGateway.id}"
   resource_id   = "${aws_api_gateway_resource.Resource.id}"
