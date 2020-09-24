@@ -1,17 +1,6 @@
-provider "aws" {
-  alias = "cognito"
-  profile = "sky"
-  region = "us-east-1"
-}
-
 # Data sources
 data "aws_api_gateway_rest_api" "ApiGateway" {
   name = "${var.api_gateway_name}-${var.environment}"
-}
-
-data "aws_cognito_user_pools" "CognitoUserPoolName" {
-  name = var.cognito_authorizer_name[var.environment]
-  provider = "aws.cognito"
 }
 
 # Parent APIGW Resource
@@ -26,7 +15,7 @@ resource "aws_api_gateway_method" "Method" {
   resource_id   = "${aws_api_gateway_resource.Resource.id}"
   http_method   = "ANY"
   authorization = "COGNITO_USER_POOLS"
-  authorizer_id = data.aws_cognito_user_pools.CognitoUserPoolName.id
+  authorizer_id = var.cognito_authorizer_id[var.environment]
 }
 
 resource "aws_api_gateway_integration" "Integration" {

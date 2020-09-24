@@ -68,5 +68,5 @@ variable "security_group_ids" {
 # var.lambda_filename
 variable "lambda_filename" {
   description = "Lambda filename"
-  default     = "./package.zip"
+  default     = "../package.zip"
 }

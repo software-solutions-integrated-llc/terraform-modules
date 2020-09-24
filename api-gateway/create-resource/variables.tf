@@ -66,11 +66,11 @@ variable "qualifier" {
 }
 
 # var.authorizer
-variable "cognito_authorizer_name" {
-  description = "Api Gateway Cognito Authorizer"
+variable "cognito_authorizer_id" {
+  description = "Api Gateway Cognito Authorizer Id"
   type        = "map"
   default     = {
-    Test  = "skyusers-dev"
+    Test  = "1u6h6a"
     Dev   = "skyusers-dev"
     Prod  = "Cognito_Auth"
   }
